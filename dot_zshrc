@@ -1,0 +1,83 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Zshrc
+
+# not running interactively then bail
+[[ $- != *i* ]] && return
+ZSH=/usr/share/oh-my-zsh
+
+# shell opts
+setopt auto_cd
+setopt bang_hist
+setopt completealiases
+setopt extended_history
+setopt hist_ignore_all_dups
+setopt hist_find_no_dups
+setopt inc_append_history
+setopt share_history
+
+function gitclean
+{
+    git fetch -p
+    for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`;
+    do
+        git branch -D $branch
+    done
+}
+
+export GO111MODULE=on
+export EDITOR=nvim
+
+plugins=(
+  git
+  sudo
+  zsh-completions
+)
+autoload -U compinit && compinit
+
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+
+ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
+if [[ ! -d $ZSH_CACHE_DIR ]]; then
+  mkdir $ZSH_CACHE_DIR
+fi
+
+source $ZSH/oh-my-zsh.sh
+if [ `tput colors` != "256" ]; then
+  ZSH_THEME="robbyrussell"
+else
+  source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
+
+export PATH=$PATH:$(go env GOPATH)/bin
+export GOPATH=$(go env GOPATH)
+export PATH="$HOME/.ebcli-virtual-env/executables:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
+# export PATH="$PATH:$HOME/flutter/bin"
+
+export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
+export SYSTEMD_EDITOR=vim
+export PIPEWIRE_LATENCY="256/96000"
+
+# alias
+unalias l
+unalias la
+unalias ll
+unalias ls
+unalias lsa
+
+alias ll='exa -l'
+alias ls='exa'
+alias grubup='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias mirrors='sudo reflector --score 100 --fastest 25 --sort rate --save /etc/pacman.d/mirrorlist --verbose'
+alias update='paru -Syyu --noconfirm'
+alias vim='nvim'
+alias sudo='sudo '

@@ -1,0 +1,37 @@
+#! /bin/sh
+
+export BSPWM_SCRIPTS_DIR="$HOME/.config/scripts"
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+sxhkd &
+nitrogen --restore &
+numlockx &
+picom -b
+$HOME/.config/polybar/launch.sh
+xrdb -load ~/.Xresources &
+clipit &
+flameshot &
+dunst &
+easyeffects --gapplication-service &
+/usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
+
+$BSPWM_SCRIPTS_DIR/enforce_monitor_position DP-4 '^1' &
+bspc monitor DP-4 -d 1 2 3 4 5 
+bspc monitor DP-2 -d 6 7 8 9 10 
+
+bspc config border_width        2
+bspc config window_gap          8
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config ignore_ewmh_focus    true
+
+bspc node @'^6':/ -i
+bspc node @'^6':/ -o 0.65 -p south -i
+
+bspc rule -a Google-chrome:google-chrome -o node=@'^6':/1
+bspc rule -a "Slack":"slack" -o node=@'^6':/2
+
+$BSPWM_SCRIPTS_DIR/autostart.sh &
+
