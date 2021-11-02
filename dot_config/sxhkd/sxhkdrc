@@ -11,7 +11,7 @@ ctrl + @space
 	~/.config/scripts/rofr.sh -r
 
 super + ctrl + f
-	exo-open --launch FileManager
+	alacritty -e ranger
 
 Print
     flameshot gui &
