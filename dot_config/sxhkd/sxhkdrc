@@ -20,12 +20,6 @@ Print
 super + Escape
 	pkill -USR1 -x sxhkd
 
-super + Henkan_Mode
-	sudo chvt 1
-
-super + Muhenkan
-	sudo chvt 2
-
 #
 # bspwm hotkeys
 #
