@@ -1,1 +1,6 @@
-rofi.theme: ./onedark.rasi
+configuration {
+ modi: "window,drun,ssh,combi";
+ theme: "./onedark.rasi";
+ font: "hack 10";
+ combi-modi: "window,drun,ssh";
+ }
