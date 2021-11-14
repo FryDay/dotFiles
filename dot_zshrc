@@ -31,8 +31,10 @@ function gitclean
 }
 
 export GO111MODULE=on
-export EDITOR="emacsclient -t -a ''"    # $EDITOR use Emacs in terminal
-export VISUAL="emacsclient -c -a emacs" # $VISUAL use Emacs in GUI mode
+#export EDITOR="emacsclient -t -a ''"    # $EDITOR use Emacs in terminal
+export EDITOR="nvim"
+#export VISUAL="emacsclient -c -a emacs" # $VISUAL use Emacs in GUI mode
+export VISUAL="nvim"
 
 plugins=(
   git

@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 ctrl + @space
-	~/.config/scripts/rofr.sh -r
+	rofi -show
 
 super + ctrl + f
 	alacritty -e ranger
