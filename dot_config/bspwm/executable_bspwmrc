@@ -7,6 +7,7 @@ sxhkd &
 nitrogen --restore &
 numlockx &
 picom -b
+ckb-next -b &
 $HOME/.config/polybar/launch.sh
 xrdb -load ~/.Xresources &
 clipit &

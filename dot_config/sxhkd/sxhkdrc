@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 ctrl + @space
-	rofi -show
+	rofi -show drun
 
 super + ctrl + f
 	alacritty -e ranger

@@ -79,6 +79,7 @@ unalias lsa
 
 alias ll='exa -l'
 alias ls='exa'
+alias cat='bat'
 alias grubup='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias mirrors='sudo reflector --score 100 --fastest 25 --sort rate --save /etc/pacman.d/mirrorlist --verbose'
 alias update='paru -Syyu --noconfirm'
@@ -90,3 +91,4 @@ alias doomdoctor="~/.emacs.d/bin/doom doctor"
 alias doomupgrade="~/.emacs.d/bin/doom upgrade"
 alias doompurge="~/.emacs.d/bin/doom purge"
 alias sudo='sudo '
+eval $(thefuck --alias)
