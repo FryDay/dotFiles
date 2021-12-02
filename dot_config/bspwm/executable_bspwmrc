@@ -10,7 +10,7 @@ picom -b
 ckb-next -b &
 $HOME/.config/polybar/launch.sh
 xrdb -load ~/.Xresources &
-clipit &
+clipcatd &
 flameshot &
 dunst &
 /usr/bin/emacs --daemon &
