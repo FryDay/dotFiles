@@ -7,7 +7,7 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch Polybar, using default config location ~/.config/polybar/config
-polybar leftBar &
-polybar rightBar &
+polybar --config=$HOME/.config/polybar/config.ini leftBar &
+polybar --config=$HOME/.config/polybar/config.ini rightBar &
 
 echo "Polybar launched..."

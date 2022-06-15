@@ -1,3 +1,9 @@
+# if tmux is executable, X is running, and not inside a tmux session, then try to attach.
+# if attachment fails, start a new session
+if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ "${TERM_PROGRAM}" != "vscode" ]; then
+  [ -z "${TMUX}" ] && { tmux attach || tmux; } >/dev/null 2>&1
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -31,9 +37,7 @@ function gitclean
 }
 
 export GO111MODULE=on
-#export EDITOR="emacsclient -t -a ''"    # $EDITOR use Emacs in terminal
 export EDITOR="nvim"
-#export VISUAL="emacsclient -c -a emacs" # $VISUAL use Emacs in GUI mode
 export VISUAL="nvim"
 
 plugins=(
@@ -42,6 +46,8 @@ plugins=(
   zsh-completions
 )
 autoload -U compinit && compinit
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 eval "$(zoxide init zsh)"
 
 export GPG_TTY="$(tty)"
@@ -65,6 +71,7 @@ export PATH=$PATH:$(go env GOPATH)/bin
 export GOPATH=$(go env GOPATH)
 export PATH="$HOME/.ebcli-virtual-env/executables:$PATH"
 export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$(yarn global bin)"
 # export PATH="$PATH:$HOME/flutter/bin"
 
 export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
@@ -90,15 +97,9 @@ alias ll='exa -l'
 alias ls='exa'
 alias cat='bat'
 alias grubup='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-alias mirrors='sudo reflector --score 100 --fastest 25 --sort rate --save /etc/pacman.d/mirrorlist --verbose'
+alias mirrors='sudo reflector --score 100 --fastest 25 --country US --sort rate --save /etc/pacman.d/mirrorlist --verbose'
 alias update='paru -Syyu --noconfirm'
 alias vim='nvim'
-alias em="/usr/bin/emacs -nw"
-alias emacs="emacsclient -c -a 'emacs'"
-alias doomsync="~/.emacs.d/bin/doom sync"
-alias doomdoctor="~/.emacs.d/bin/doom doctor"
-alias doomupgrade="~/.emacs.d/bin/doom upgrade"
-alias doompurge="~/.emacs.d/bin/doom purge"
 alias sudo='sudo '
 alias youtube-dl='yt-dlp'
 eval $(thefuck --alias)
