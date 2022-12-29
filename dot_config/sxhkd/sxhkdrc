@@ -139,11 +139,11 @@ super + {Left,Down,Up,Right}
 # media
 # 
 XF86AudioMute
-    pactl set-sink-mute alsa_output.usb-Focusrite_Scarlett_2i2_USB_Y8ZN5AG048E72A-00.analog-stereo toggle
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
 XF86AudioRaiseVolume
-    pactl set-sink-volume alsa_output.usb-Focusrite_Scarlett_2i2_USB_Y8ZN5AG048E72A-00.analog-stereo +5%
+    pactl set-sink-volume @DEFAULT_SINK@ +5%
 XF86AudioLowerVolume
-    pactl set-sink-volume alsa_output.usb-Focusrite_Scarlett_2i2_USB_Y8ZN5AG048E72A-00.analog-stereo -5%
+    pactl set-sink-volume @DEFAULT_SINK@ -5%
 
 XF86AudioPlay
     dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
@@ -165,3 +165,11 @@ super + shift + m
 # lock screen
 super + shift + x
 	betterlockscreen -l dim
+
+#
+# misc
+#
+
+# toggle notifications
+super + n
+    ~/.config/scripts/toggle_dunst.sh

@@ -1,8 +1,8 @@
 # if tmux is executable, X is running, and not inside a tmux session, then try to attach.
 # if attachment fails, start a new session
-if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ "${TERM_PROGRAM}" != "vscode" ]; then
-  [ -z "${TMUX}" ] && { tmux attach || tmux; } >/dev/null 2>&1
-fi
+#if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ "${TERM_PROGRAM}" != "vscode" ]; then
+#  [ -z "${TMUX}" ] && { tmux attach || tmux; } >/dev/null 2>&1
+#fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -75,7 +75,7 @@ export PATH="$PATH:$(yarn global bin)"
 # export PATH="$PATH:$HOME/flutter/bin"
 
 export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
-export SYSTEMD_EDITOR=vim
+export SYSTEMD_EDITOR=nvim
 export PIPEWIRE_LATENCY="256/96000"
 
 # alias

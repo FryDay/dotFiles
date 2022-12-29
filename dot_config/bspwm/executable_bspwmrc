@@ -13,12 +13,10 @@ xrdb -load ~/.Xresources &
 clipcatd &
 flameshot &
 dunst &
-/usr/bin/emacs --daemon &
-easyeffects --gapplication-service &
 /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 udiskie &
 
-bspc rule -a Emacs state=tiled
+#bspc rule -a Emacs state=tiled
 
 $BSPWM_SCRIPTS_DIR/enforce_monitor_position DP-4 '^1' &
 bspc monitor DP-4 -d 1 2 3 4 5 
