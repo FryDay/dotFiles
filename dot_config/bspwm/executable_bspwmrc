@@ -18,23 +18,27 @@ udiskie &
 
 #bspc rule -a Emacs state=tiled
 
-$BSPWM_SCRIPTS_DIR/enforce_monitor_position DP-4 '^1' &
-bspc monitor DP-4 -d 1 2 3 4 5 
-bspc monitor DP-2 -d 6 7 8 9 10 
+$BSPWM_SCRIPTS_DIR/enforce_monitor_position DP-0 '^1' &
+$BSPWM_SCRIPTS_DIR/enforce_monitor_position DP-2 '^2' &
+$BSPWM_SCRIPTS_DIR/enforce_monitor_position DP-4 '^3' &
+bspc monitor DP-0 -d 1 2 3 4 5 
+bspc monitor DP-2 -d 6 7 8 
+bspc monitor DP-4 -d 9 10 
 
 bspc config border_width        2
 bspc config window_gap          8
 
-bspc config split_ratio          0.52
+bspc config split_ratio          0.5
+bscp config automatic_scheme     alternate
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 bspc config ignore_ewmh_focus    true
 
-bspc node @'^6':/ -i
-bspc node @'^6':/ -o 0.65 -p south -i
+#bspc node @'^6':/ -i
+#bspc node @'^6':/ -o 0.65 -p south -i
 
-bspc rule -a Google-chrome:google-chrome -o node=@'^6':/1
-bspc rule -a "Slack":"slack" -o node=@'^6':/2
+#bspc rule -a Google-chrome:google-chrome -o node=@'^6':/1
+#bspc rule -a "Slack":"slack" -o node=@'^6':/2
 
-$BSPWM_SCRIPTS_DIR/autostart.sh &
+#$BSPWM_SCRIPTS_DIR/autostart.sh &
 
