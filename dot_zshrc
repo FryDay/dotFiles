@@ -99,7 +99,8 @@ alias cat='bat'
 alias grubup='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias mirrors='sudo reflector --score 100 --fastest 25 --country US --sort rate --save /etc/pacman.d/mirrorlist --verbose'
 alias update='paru -Syyu --noconfirm'
-alias vim='nvim'
+alias vim='lvim'
 alias sudo='sudo '
 alias youtube-dl='yt-dlp'
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 eval $(thefuck --alias)
