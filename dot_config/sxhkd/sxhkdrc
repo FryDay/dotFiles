@@ -11,7 +11,7 @@ ctrl + @space
 	rofi -show drun
 
 super + ctrl + f
-	alacritty -e ranger
+	kitty -e ranger
 
 Print
     flameshot gui &
