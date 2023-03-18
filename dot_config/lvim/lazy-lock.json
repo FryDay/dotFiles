@@ -19,6 +19,7 @@
   "mason.nvim": { "branch": "main", "commit": "b3db6999fdf0170619a1c8fa41586bea3669a94a" },
   "neodev.nvim": { "branch": "main", "commit": "50eaabc6645b43ded9126f97080bff767063b1c6" },
   "night-owl.vim": { "branch": "master", "commit": "783a41a27f7fe55ed91d1ec0f0351d06ae17fbc7" },
+  "nightfox.nvim": { "branch": "main", "commit": "53cdaa583138698f4a0a4a9d2abaf761c8960407" },
   "nlsp-settings.nvim": { "branch": "main", "commit": "1b9fed5dec33c6c731dc8ff91d337091930474be" },
   "null-ls.nvim": { "branch": "main", "commit": "ccd6cb05b176bff65819c85b8d29096b5e0750d4" },
   "nvim-autopairs": { "branch": "master", "commit": "e755f366721bc9e189ddecd39554559045ac0a18" },
@@ -42,5 +43,6 @@
   "toggleterm.nvim": { "branch": "main", "commit": "31d38d11390bcd35a568fcc65a79b7d6ec89de62" },
   "tokyonight.nvim": { "branch": "main", "commit": "3ebc29df627c5cf70eb6acb8f0843c9ea9cf6348" },
   "vim-illuminate": { "branch": "master", "commit": "49062ab1dd8fec91833a69f0a1344223dd59d643" },
+  "vim-nightfly-colors": { "branch": "master", "commit": "83f6c366070992784c13bc255b6e7cbcef1f066f" },
   "which-key.nvim": { "branch": "main", "commit": "fb027738340502b556c3f43051f113bcaa7e8e63" }
 }
