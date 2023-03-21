@@ -1,0 +1,17 @@
+{{- if ne .chezmoi.os "linux"}}
+.Xmodmap
+.Xresources
+.config/betterlockscreenrc
+.config/bspwm
+.config/ckb-next
+.config/clipcat
+.config/dunst
+.config/paru
+.config/picom.conf
+.config/polybar
+.config/rofi
+.config/sxhkd
+{{ end }}
+{{- if ne .chezmoi.os "darwin"}}
+
+{{ end }}
