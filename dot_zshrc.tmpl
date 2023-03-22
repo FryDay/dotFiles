@@ -15,7 +15,11 @@ fi
 
 # not running interactively then bail
 [[ $- != *i* ]] && return
+{{ if eq .chezmoi.os "linux" }}
 ZSH=/usr/share/oh-my-zsh
+{{ else }}
+ZSH=~/.oh-my-zsh
+{{ end }}
 
 # shell opts
 setopt auto_cd
@@ -37,18 +41,24 @@ function gitclean
 }
 
 export GO111MODULE=on
-export EDITOR="nvim"
-export VISUAL="nvim"
+export EDITOR="lvim"
+export VISUAL="lvim"
 
 plugins=(
   git
   sudo
   zsh-completions
 )
+
+{{ if eq .chezmoi.os "linux" }}
 autoload -U compinit && compinit
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 eval "$(zoxide init zsh)"
+{{ else }}
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+{{ end }}
 
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
@@ -59,6 +69,7 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
+{{ if eq .chezmoi.os "linux" }}
 source $ZSH/oh-my-zsh.sh
 if [ `tput colors` != "256" ]; then
   ZSH_THEME="robbyrussell"
@@ -67,16 +78,15 @@ else
   [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fi
 
+export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
+export SYSTEMD_EDITOR=nvim
+export PIPEWIRE_LATENCY="256/48000"
+
 export PATH=$PATH:$(go env GOPATH)/bin
 export GOPATH=$(go env GOPATH)
 export PATH="$HOME/.ebcli-virtual-env/executables:$PATH"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$(yarn global bin)"
-# export PATH="$PATH:$HOME/flutter/bin"
-
-export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
-export SYSTEMD_EDITOR=nvim
-export PIPEWIRE_LATENCY="256/48000"
 
 # alias
 unalias l
@@ -99,9 +109,23 @@ alias cat='bat'
 alias grubup='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias mirrors='sudo reflector --score 100 --fastest 25 --country US --sort rate --save /etc/pacman.d/mirrorlist --verbose'
 alias update='paru -Syyu --noconfirm'
-alias vim='lvim'
 alias sudo='sudo '
 alias youtube-dl='yt-dlp'
+eval $(thefuck --alias)
+{{ else }}
+source $ZSH/oh-my-zsh.sh
+if [ `tput colors` != "256" ]; then
+  ZSH_THEME="robbyrussell"
+else
+  source ~/.powerlevel10k/powerlevel10k.zsh-theme
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
+
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+{{ end }}
+
+alias vim='lvim'
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 [ "$TERM" = "xterm-kitty" ] && alias icat="kitty +kitten icat"
-eval $(thefuck --alias)

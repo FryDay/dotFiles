@@ -13,5 +13,5 @@
 .config/sxhkd
 {{ end }}
 {{- if ne .chezmoi.os "darwin"}}
-
+.yabairc
 {{ end }}
