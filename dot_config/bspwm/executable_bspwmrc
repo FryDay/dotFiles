@@ -17,6 +17,7 @@ dunst &
 udiskie &
 
 #bspc rule -a Emacs state=tiled
+bspc rule -a gnome-calculator state=floating
 
 $BSPWM_SCRIPTS_DIR/enforce_monitor_position DP-0 '^1' &
 $BSPWM_SCRIPTS_DIR/enforce_monitor_position DP-2 '^2' &
