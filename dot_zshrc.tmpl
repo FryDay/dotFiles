@@ -41,8 +41,8 @@ function gitclean
 }
 
 export GO111MODULE=on
-export EDITOR="lvim"
-export VISUAL="lvim"
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 plugins=(
   git
@@ -69,6 +69,12 @@ source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
+
+export ANDROID_HOME="$HOME/Android/Sdk"
+export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+export PATH=$ANDROID_SDK_ROOT/tools:$PATH
+export PATH=$ANDROID_SDK_ROOT/platform-tools:$PATH
+export PATH=$ANDROID_HOME/emulator:$PATH
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
@@ -109,7 +115,7 @@ if type clipcat-menu >/dev/null 2>&1; then
 fi
 
 alias grubup='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-alias mirrors='sudo reflector --score 100 --fastest 25 --country US --sort rate --save /etc/pacman.d/mirrorlist --verbose'
+alias mirrors='sudo reflector --score 100 --latest 25 --country US --protocol https --sort rate --save /etc/pacman.d/mirrorlist --verbose'
 alias update='paru -Syyu --noconfirm'
 alias sudo='sudo '
 alias youtube-dl='yt-dlp'
@@ -135,6 +141,6 @@ alias cat='bat'
 export DYNAMO_ENDPOINT=http://localhost:8000
 export PATH="$PATH:$(yarn global bin)"
 
-alias vim='lvim'
+alias vim='nvim'
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 [ "$TERM" = "xterm-kitty" ] && alias icat="kitty +kitten icat"
