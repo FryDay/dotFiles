@@ -48,6 +48,7 @@ plugins=(
   git
   sudo
   zsh-completions
+  nvm
 )
 if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
@@ -91,7 +92,6 @@ export PATH=$PATH:$(go env GOPATH)/bin
 export GOPATH=$(go env GOPATH)
 export PATH="$HOME/.ebcli-virtual-env/executables:$PATH"
 export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$(yarn global bin)"
 
 # alias
 unalias l
@@ -108,9 +108,6 @@ if type clipcat-menu >/dev/null 2>&1; then
     bindkey -s '^]' "^Q clipcat-menu --finder=builtin remove ^J"
 fi
 
-alias ll='exa -l'
-alias ls='exa'
-alias cat='bat'
 alias grubup='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias mirrors='sudo reflector --score 100 --fastest 25 --country US --sort rate --save /etc/pacman.d/mirrorlist --verbose'
 alias update='paru -Syyu --noconfirm'
@@ -130,6 +127,13 @@ export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 {{ end }}
+
+alias ll='exa -l'
+alias ls='exa'
+alias cat='bat'
+
+export DYNAMO_ENDPOINT=http://localhost:8000
+export PATH="$PATH:$(yarn global bin)"
 
 alias vim='lvim'
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
