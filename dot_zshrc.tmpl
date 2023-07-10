@@ -41,8 +41,8 @@ function gitclean
 }
 
 export GO111MODULE=on
-export EDITOR="lvim"
-export VISUAL="lvim"
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 plugins=(
   git
@@ -137,6 +137,6 @@ export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 {{ end }}
 
-alias vim='lvim'
+alias vim='nvim'
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 [ "$TERM" = "xterm-kitty" ] && alias icat="kitty +kitten icat"
