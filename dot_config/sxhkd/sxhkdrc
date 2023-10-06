@@ -7,7 +7,7 @@ super + Return
 	kitty
 
 # program launcher
-ctrl + @space
+super + @space
 	rofi -show drun
 
 super + ctrl + f
