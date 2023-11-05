@@ -2,6 +2,8 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, DropDown, Group, Key, Match, ScratchPad, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from spotify import Spotify
+from hibernate import Hibernate
 
 mod = "mod4"
 terminal = "kitty"
@@ -108,18 +110,12 @@ screens = [
             [
                 widget.GroupBox(),
                 widget.Prompt(),
-                #widget.WindowName(),
-                #widget.Chord(
-                #    chords_colors={
-                #        "launch": ("#ff0000", "#ffffff"),
-                #    },
-                #    name_transform=lambda name: name.upper(),
-                #),
                 widget.Spacer(),
                 widget.Clock(format="%b %d 20%g %H:%M"),
                 widget.Spacer(),
+                Spotify(format="{icon} {artist} - {track}"),
                 widget.Systray(),
-                widget.QuickExit(),
+                Hibernate(),
             ],
             24,
         ),
