@@ -1,13 +1,21 @@
-from libqtile import bar, layout, widget
+from libqtile import bar, hook, layout, widget
 from libqtile.config import Click, Drag, DropDown, Group, Key, Match, ScratchPad, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from libqtile.scripts.main import VERSION
+from os.path import expanduser
+from subprocess import run
 from spotify import Spotify
-from hibernate import Hibernate
+
+@hook.subscribe.startup_once
+def autostart():
+    script = expanduser("~/.config/qtile/autostart.sh")
+    run([script])
 
 mod = "mod4"
 terminal = "kitty"
 launcher = "rofi"
+home = expanduser('~')
 
 keys = [
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -39,11 +47,14 @@ keys = [
     Key([mod, "mod1"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "mod1"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([], "Print", lazy.spawn("flameshot gui"), desc="Print screen"),
     Key([mod, "shift"], "x", lazy.spawn("betterlockscreen -l dim"), desc="Lock screen"),
     Key([mod, "shift"], "f",
         lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen",
     ),
+    Key([mod], "n", lazy.spawn(home + "/.config/scripts/toggle_dunst.sh"), desc="Toggle notifications"),
+    Key([mod], "Escape", lazy.spawn("systemctl hibernate"), desc="Hibernate"),
 
     # Media Keys
     Key([], "XF86AudioPlay", lazy.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"), desc="Play/Pause Spotify"),
@@ -115,7 +126,6 @@ screens = [
                 widget.Spacer(),
                 Spotify(format="{icon} {artist} - {track}"),
                 widget.Systray(),
-                Hibernate(),
             ],
             24,
         ),
@@ -144,6 +154,8 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+        Match(wm_class="gnome-calculator"),
+        Match(wm_class="paradox launcher"),
     ]
 )
 auto_fullscreen = True
@@ -165,4 +177,5 @@ wl_input_rules = None
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-wmname = "LG3D"
+# wmname = "LG3D"
+wmname = f"Qtile {VERSION}"
