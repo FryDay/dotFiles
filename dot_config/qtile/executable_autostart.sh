@@ -14,3 +14,4 @@ flameshot &
 dunst &
 udiskie &
 /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
+nm-applet &

@@ -53,7 +53,7 @@ keys = [
         lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen",
     ),
-    Key([mod], "n", lazy.spawn(home + "/.config/scripts/toggle_dunst.sh"), desc="Toggle notifications"),
+    Key([mod, "mod1"], "n", lazy.spawn(home + "/.config/scripts/toggle_dunst.sh"), desc="Toggle notifications"),
     Key([mod], "Escape", lazy.spawn("systemctl hibernate"), desc="Hibernate"),
 
     # Media Keys
@@ -77,7 +77,7 @@ for i in groups:
             Key(
                 [mod, "shift"],
                 i.name,
-                lazy.window.togroup(i.name, switch_group=True),
+                lazy.window.togroup(i.name, switch_group=False),
                 desc="Switch to & move focused window to group {}".format(i.name),
             ),
         ]
@@ -85,12 +85,14 @@ for i in groups:
 
 groups.append(ScratchPad("scratchpad", [
     DropDown("spotify", "spotify", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1, on_focus_lost_hide=False),
-    DropDown("ranger", terminal + " -e ranger", width=0.8, height=0.8, x=0.1, y=0.1, opacity=0.9, on_focus_lost_hide=False),
+    DropDown("yazi", terminal + " -e yazi", width=0.8, height=0.8, x=0.1, y=0.1, opacity=0.9, on_focus_lost_hide=False),
+    DropDown("obsidian", "obsidian", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1, on_focus_lost_hide=False),
 ]))
 
 keys.extend([
     Key([mod], "s", lazy.group['scratchpad'].dropdown_toggle('spotify')),
-    Key([mod], "f", lazy.group['scratchpad'].dropdown_toggle('ranger')),
+    Key([mod], "f", lazy.group['scratchpad'].dropdown_toggle('yazi')),
+    Key([mod], "n", lazy.group['scratchpad'].dropdown_toggle('obsidian')),
 ])
 
 layouts = [
