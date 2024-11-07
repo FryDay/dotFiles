@@ -9,7 +9,6 @@ easyeffects --gapplication-service &
 nitrogen --restore &
 numlockx &
 picom -b &
-ckb-next -b &
 flameshot &
 dunst &
 udiskie &
